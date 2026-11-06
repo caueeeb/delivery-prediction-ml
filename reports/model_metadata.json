@@ -1,0 +1,51 @@
+{
+    "project": "Delivery Delay Prediction",
+    "dataset": "Brazilian E-Commerce Public Dataset by Olist",
+    "algorithm": "Logistic Regression",
+    "parameters": {
+        "C": 10.0,
+        "class_weight": null,
+        "max_iter": 1500,
+        "random_state": 42
+    },
+    "threshold": 0.15,
+    "training_records": 77176,
+    "test_records": 19294,
+    "features": [
+        "customer_state",
+        "item_count",
+        "distinct_products",
+        "distinct_sellers",
+        "total_item_price",
+        "total_freight",
+        "avg_item_price",
+        "total_product_weight_g",
+        "distinct_categories",
+        "missing_product_weights",
+        "missing_product_categories",
+        "payment_total",
+        "payment_installments_max",
+        "payment_methods_count",
+        "payment_records_count",
+        "seller_count",
+        "seller_state_count",
+        "seller_city_count",
+        "same_state_seller_count",
+        "same_state_seller_share",
+        "purchase_hour",
+        "purchase_day_of_week",
+        "purchase_month",
+        "purchase_is_weekend",
+        "estimated_delivery_window_days",
+        "has_payment_record"
+    ],
+    "metrics": {
+        "Accuracy": 0.8450295428630662,
+        "Precision": 0.06726457399103139,
+        "Recall": 0.26706231454005935,
+        "F1-score": 0.10746268656716418,
+        "Average Precision": 0.0716377889081029
+    },
+    "target": "is_late",
+    "target_definition": "Delivery after estimated calendar date"
+}
