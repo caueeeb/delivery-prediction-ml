@@ -1,0 +1,3 @@
+Feature,Comparison,Jensen_Shannon_Distance
+customer_state,Fit_vs_Validation,0.0562681311365658
+customer_state,Fit_vs_Test,0.06260813936851392
