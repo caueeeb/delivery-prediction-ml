@@ -9,8 +9,32 @@
         "random_state": 42
     },
     "threshold": 0.15,
+    "threshold_selection": "maior F1-score na validação",
     "training_records": 77176,
     "test_records": 19294,
+    "splits": {
+        "fit": {
+            "rows": 61740,
+            "start": "2016-09-15",
+            "end": "2018-03-20",
+            "late_orders": 4828,
+            "late_rate": 0.07819889860706188
+        },
+        "validation": {
+            "rows": 15436,
+            "start": "2018-03-20",
+            "end": "2018-05-26",
+            "late_orders": 1032,
+            "late_rate": 0.0668566986265872
+        },
+        "test": {
+            "rows": 19294,
+            "start": "2018-05-26",
+            "end": "2018-08-29",
+            "late_orders": 674,
+            "late_rate": 0.03493313983621851
+        }
+    },
     "features": [
         "customer_state",
         "item_count",
@@ -46,6 +70,42 @@
         "F1-score": 0.10746268656716418,
         "Average Precision": 0.0716377889081029
     },
+    "test_context": {
+        "ROC-AUC": 0.6988976787029039,
+        "Late rate (prevalence)": 0.03493313983621851,
+        "AP lift over prevalence": 2.050711423134922,
+        "Confusion matrix [[TN, FP], [FN, TP]]": [
+            [
+                16124,
+                2496
+            ],
+            [
+                494,
+                180
+            ]
+        ]
+    },
+    "validation_metrics": {
+        "Accuracy": 0.8526172583570873,
+        "Precision": 0.19756690997566909,
+        "Recall": 0.39341085271317827,
+        "F1-score": 0.26303854875283444,
+        "Average Precision": 0.17507667356099083,
+        "ROC-AUC": 0.734479541374166,
+        "Late rate (prevalence)": 0.0668566986265872,
+        "AP lift over prevalence": 2.6186855940769904,
+        "Confusion matrix [[TN, FP], [FN, TP]]": [
+            [
+                12755,
+                1649
+            ],
+            [
+                626,
+                406
+            ]
+        ]
+    },
     "target": "is_late",
-    "target_definition": "Delivery after estimated calendar date"
+    "target_definition": "Delivery after estimated calendar date",
+    "sklearn_version": "1.9.1"
 }
