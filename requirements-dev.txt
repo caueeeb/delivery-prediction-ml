@@ -1,0 +1,12 @@
+# Development dependencies: tests, lint and the analysis notebooks.
+-r requirements.txt
+
+pytest==9.2.0
+httpx==0.28.1
+ruff>=0.9
+
+# Notebooks (notebooks/ and research/)
+matplotlib==3.11.2
+seaborn==0.13.2
+ipykernel==7.4.0
+notebook==7.6.4

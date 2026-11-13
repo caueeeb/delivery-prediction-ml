@@ -4,6 +4,8 @@ from pathlib import Path
 import joblib
 import pandas as pd
 
+from src import config
+
 
 def load_model(filepath):
     """Carrega um modelo de Machine Learning salvo."""
@@ -18,7 +20,7 @@ def load_model(filepath):
     return joblib.load(filepath)
 
 
-def predict_late(model, X, threshold=0.15):    
+def predict_late(model, X, threshold=config.DEFAULT_THRESHOLD):
     """
     Realiza previsões de atraso.
 

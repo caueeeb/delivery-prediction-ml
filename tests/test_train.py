@@ -1,8 +1,5 @@
 
-from src.train import (
-    train_model,
-    evaluate_at_threshold
-)
+from src.train import evaluate_at_threshold, train_model
 
 
 def test_model_training(sample_data):

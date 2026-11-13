@@ -2,10 +2,7 @@
 import pandas as pd
 import pytest
 
-from src.preprocessing import (
-    make_temporal_splits,
-    load_raw_tables
-)
+from src.preprocessing import load_raw_tables, make_temporal_splits
 
 
 def test_temporal_splits():

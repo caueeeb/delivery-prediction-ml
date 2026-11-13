@@ -1,7 +1,7 @@
 
 from pathlib import Path
-import pandas as pd
 
+import pandas as pd
 
 # Colunas utilizadas para identificar as datas
 DATE_COLUMNS = [
@@ -313,7 +313,7 @@ def build_feature_base(data_dir: Path) -> pd.DataFrame:
         "estimated_delivery_window_days",
         "has_payment_record"
     ]
-    
+
     base = base[column_order]
 
     # Garantir uma linha por pedido

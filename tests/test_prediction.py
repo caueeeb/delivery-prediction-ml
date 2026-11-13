@@ -1,8 +1,8 @@
 
 import pytest
 
-from src.train import train_model, save_model
-from src.predict import predict_late, load_model
+from src.predict import load_model, predict_late
+from src.train import save_model, train_model
 
 
 def test_prediction(sample_data):
