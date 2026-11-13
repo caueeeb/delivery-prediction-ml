@@ -141,6 +141,12 @@ The overall Brier score was **0.03800**. A constant-probability baseline using t
 
 The Brier score is a proper scoring rule that reflects calibration, resolution/discrimination, and outcome uncertainty together; it should not be interpreted as a pure calibration measure (scikit-learn documentation, *Probability calibration*).
 
+### 5.6 Supplementary diagnostic: random versus chronological evaluation
+
+To check how much the evaluation protocol itself matters, the same pipeline was also evaluated with random stratified partitions (64% / 16% / 20%) over ten random seeds. Random evaluation reported Average Precision of 0.152 ± 0.008 and an F1-score of 0.216 ± 0.004, roughly double the chronological values (0.072 and 0.108). Rank-based measures normalized for class balance, however, were nearly the same: ROC-AUC was 0.70 under both protocols, and Average Precision was about 2.0–2.2 times the prevalence.
+
+In this dataset, a large part of the drop in absolute Average Precision and F1-score is therefore consistent with the lower late-delivery prevalence in the test period (3.49% versus 6.77% overall), rather than with a clear loss of ranking ability. Random evaluation would still have been misleading, because it overstated the precision and recall a team could expect for a fixed threshold in a later period. The full table, method and caveats are in `RESULTS_AND_DISCUSSION.md` (section 12) and `random_vs_chronological.py`.
+
 ## 6. Discussion
 
 The experiments reveal several connected issues:
@@ -149,7 +155,7 @@ The experiments reveal several connected issues:
 2. **Some input distributions also changed.** Freight and estimated delivery-window features showed notable differences between training and test.
 3. **The fixed decision threshold produced too many alerts.** Precision was low, and the majority-class baseline achieved higher accuracy in every evaluated test month.
 4. **Probability estimates were not reliable enough for operational interpretation.** The mean predicted risk was higher than the observed event frequency, and the model did not outperform a training-prevalence Brier baseline.
-5. **Some ranking information remained.** Average Precision exceeded the positive-class prevalence overall and in the later test months, although the relative lift weakened.
+5. **Some ranking information remained.** Average Precision exceeded the positive-class prevalence overall and in the later test months, although the relative lift weakened. The supplementary diagnostic in section 5.6 suggests that much of the drop in absolute Average Precision and F1-score is associated with the lower prevalence, because ROC-AUC (about 0.70) was similar under random and chronological evaluation.
 
 These results are consistent with temporal distribution shift affecting model evaluation and usefulness. They do **not** establish strict concept drift, which would require evidence that the conditional relationship between features and the target, P(Y|X), changed over time. Establishing that would require further analysis, for example rolling temporal evaluation, subgroup/conditional error analysis, and sufficiently supported comparisons of P(Y|X) across periods.
 

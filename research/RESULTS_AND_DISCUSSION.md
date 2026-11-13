@@ -172,7 +172,26 @@ At the previously selected threshold of 0.15, the classifier achieved 84.50% acc
 
 The findings support the practical importance of chronological validation, monitoring changes in both input and target distributions, and evaluating ranking, thresholded classification, and probability quality separately. They do not prove a causal mechanism or confirm real concept drift in P(Y|X). Future work should investigate rolling-origin validation, more stable month-level estimates, conditional drift analysis, probability recalibration using validation-only data, threshold selection based on explicit operational costs, and adaptation strategies assessed on a strictly future holdout.
 
-### 12. References
+### 12. Supplementary diagnostic: random versus chronological evaluation (H3)
+
+Hypothesis H3 of the research protocol asks whether a random stratified split and a chronological split produce different estimates of generalization performance. This diagnostic was run after the main analysis, with `random_vs_chronological.py`, using the same preprocessing, model definition, validation-only threshold selection (maximum F1 on a grid from 0.05 to 0.95) and final refit on training plus validation as the main experiment. Random partitions used the same proportions (64% / 16% / 20%), stratified by the target, over ten random seeds. Random splitting mixes observations from different dates, so it does not represent a future-prediction scenario; it is a diagnostic only.
+
+| Metric (test partition) | Chronological | Random stratified (mean ± std, 10 seeds) |
+|---|---:|---:|
+| Late-order prevalence | 3.49% | 6.77% |
+| Average Precision | 0.0716 | 0.1517 ± 0.0077 |
+| AP lift over prevalence | 2.05× | 2.24× ± 0.11 |
+| ROC-AUC | 0.699 | 0.696 ± 0.007 |
+| Precision (validation-selected threshold) | 6.73% | 14.71% ± 0.32 |
+| Recall | 26.71% | 40.46% ± 0.81 |
+| F1-score | 0.1075 | 0.2157 ± 0.0040 |
+| Threshold selected on validation | 0.15 | 0.10 |
+
+**Reading the result.** The random split gives much higher absolute Average Precision, precision, recall and F1-score than the chronological split, so random evaluation would have reported a considerably more optimistic picture. However, the two rank-based measures that are normalized for class balance are very similar: ROC-AUC is about 0.70 under both protocols, and Average Precision is roughly two times the prevalence under both. In this experiment, most of the drop in absolute Average Precision and F1-score between the validation period and the test period is therefore consistent with the lower late-order prevalence (a change in P(Y)) rather than with a clear loss of ranking ability. The threshold chosen on validation data (0.15) was also tuned for a period with a higher late-delivery rate, which helps explain the large number of false alerts reported in sections 7 and 9.
+
+This does not contradict the earlier findings, and it does not show that P(Y|X) stayed constant: ROC-AUC and AP lift are summary measures over the whole test period, and the monthly analysis shows AP lift weakening in later months. It does suggest that, for this dataset, reporting threshold-dependent and prevalence-dependent metrics alone can overstate how much the model's discriminative signal degraded.
+
+### 13. References
 
 - Gama, J., Žliobaitė, I., Bifet, A., Pechenizkiy, M., & Bouchachia, A. (2014). [A survey on concept drift adaptation](https://doi.org/10.1145/2523813). *ACM Computing Surveys, 46*(4), Article 44.
 - scikit-learn developers. [Probability calibration](https://scikit-learn.org/stable/modules/calibration.html). scikit-learn documentation.
